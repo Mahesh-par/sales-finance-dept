@@ -1,5 +1,17 @@
 # React + TypeScript + Vite
 
+## View the finance frontend on your network
+
+Start the finance frontend with `npm run dev` and the sales backend on port
+`3500`. Vite listens on all network interfaces, so devices on the same network
+can open `http://<your-computer-ip>:5173`. For example, if your computer's LAN
+IP is `172.168.16.39`, open `http://172.168.16.39:5173`.
+
+The frontend connects to the backend on port `3500` using the same hostname as
+the page. Allow inbound connections to ports `5173` and `3500` in Windows
+Firewall if prompted. The computer's LAN IP may change when it reconnects to
+the network.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
