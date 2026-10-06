@@ -253,10 +253,18 @@ function App() {
         const response = await fetch(`${API_BASE_URL}/api/data/dashboard`, { headers: { Authorization: `Bearer ${token}` } })
         const json = await response.json().catch(() => ({}))
         if (!response.ok) {
-          if (response.status === 401) {
+          const invalidToken =
+            response.status === 403 &&
+            typeof json.error === 'string' &&
+            json.error.toLowerCase() === 'invalid token'
+
+          if (response.status === 401 || invalidToken) {
             setUser(null)
+            setData(null)
+            setError('')
             localStorage.removeItem('token')
             localStorage.removeItem('user')
+            return
           }
           throw new Error(json.error || 'Failed to fetch finance dashboard data.')
         }
